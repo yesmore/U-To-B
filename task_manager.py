@@ -5,7 +5,7 @@ import new_downloader
 import requests
 
 OWNER=486914885 # 要发送命令的用户uid(现在B站叫mid)
-REFERSH_TIME=2.5 # 检查命令消息间隔时间，单位：分钟
+REFERSH_TIME=0.1 # 检查命令消息间隔时间，单位：分钟
 
 
 def get_cookie():
@@ -25,6 +25,7 @@ def no_space(string):
 
 def get_bilibili_api(url):
     r = requests.get(url,cookies={"SESSDATA": get_cookie()}) #,verify=False)
+    print(json.loads(r.text))
     return json.loads(r.text)
 
 def save(data,path="./data.json"):
@@ -42,13 +43,18 @@ def match_url(url):
 def get_task_list():
     # global TID #顺便刷下TID
     return_list=[]
-    task_list=get_bilibili_api("https://api.vc.bilibili.com/svr_sync/v1/svr_sync/fetch_session_msgs?talker_id="+str(OWNER)+"&session_type=1")["data"]["messages"]
+    url="https://api.vc.bilibili.com/svr_sync/v1/svr_sync/fetch_session_msgs?talker_id="+str(OWNER)+"&session_type=1&begin_seqno=891409356603401"
+    # url="https://api.vc.bilibili.com/svr_sync/v1/svr_sync/fetch_session_msgs?sender_device_id=1&talker_id=486914885&session_type=1&size=50&begin_seqno=891409356603401&build=0&mobi_app=web"
+    task_list=get_bilibili_api(url)["data"]["messages"]
+    print(task_list)
     i=0
     while i<len(task_list):
         msg_obj=task_list[i]
-        if msg_obj["sender_uid"]==OWNER and msg_obj["msg_type"]==1:#鉴权&&防止特殊消息混入
+        if msg_obj["sender_uid"]==OWNER and msg_obj["msg_type"]==1: # 鉴权&&防止特殊消息混入
             if msg_obj["content"].find("$")!=-1:
-                return_list.append(match_url(msg_obj["content"]))
+                msg = match_url(msg_obj["content"])
+                return_list.append(msg)
+                print("[🎯 接收消息]: ", msg)
             #if msg_obj["content"].find("<")!=-1 and msg_obj["content"].find(">")!=-1:
             #    TID=int(no_space(msg_obj["content"].split("<")[1].split(">")[0]))
             #    print("TID is updated to "+str(TID))
@@ -67,9 +73,10 @@ def main():
         task_list=get_task_list()
         n=0
         while n<len(task_list):
+            print("hi")
             task=task_list[n]
             if task not in task_history:
-                print("new task: "+task)
+                print("[🛠️ 新任务]: "+task)
                 if task.find("*")!=-1:
                     plain=False
                 else:
@@ -77,7 +84,7 @@ def main():
                 if task.find("<")!=-1:
                     TID = int(no_space(task.split("<")[1].split(">")[0]))
                 else:
-                    TID = 130 #默认TID misic
+                    TID = 130 # 默认TID misic
                 new_downloader.main(task,TID,plain)
                 task_history.append(task)
                 save(task_history)
@@ -97,6 +104,6 @@ if __name__=="__main__":
         try:
             main()
         except Exception as e:
-            print(e)
+            print("[error]", e)
             time.sleep(REFERSH_TIME*60)
             continue
