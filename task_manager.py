@@ -44,7 +44,6 @@ def get_task_list():
     # global TID #顺便刷下TID
     return_list=[]
     url="https://api.vc.bilibili.com/svr_sync/v1/svr_sync/fetch_session_msgs?talker_id="+str(OWNER)+"&session_type=1&begin_seqno=891409356603401"
-    # url="https://api.vc.bilibili.com/svr_sync/v1/svr_sync/fetch_session_msgs?sender_device_id=1&talker_id=486914885&session_type=1&size=50&begin_seqno=891409356603401&build=0&mobi_app=web"
     task_list=get_bilibili_api(url)["data"]["messages"]
     print(task_list)
     i=0
