@@ -11,7 +11,7 @@ sudo bash setup.sh
 ./biliup login
 ```
 
-在运行下面这行命令之前请先参照下文中"正经的使用方法"中的2，3步对task_manager.py 和 new_downloader.py 做出修改
+在运行下面这行命令之前请先参照下文中 `正经的使用方法` 中的**2、3**步对 `task_manager.py` 和 `new_downloader.py` 做出修改
 
 ```shell
 sudo bash start.sh 
@@ -24,6 +24,7 @@ sudo bash start.sh
 - 2.将task_manager.py中的`OWNER`变量改为自己的uid.  
 - 3.将new_downloader.py中的`OWNER_NAME`变量改为自己的用户名.  
 - 4.运行:
+
 ```shell
 sudo bash setup.sh && sudo bash start.sh 
 ```
