@@ -1,10 +1,10 @@
-# 「自动书记人偶/Auto Memories Doll」
+# 投稿姬
 把YouTube视频自动搬运到B站的机器人，依靠B站消息触发，也支持命令行调用。  
 
 # 快速开始
 ```shell
 sudo apt install git
-sudo git clone https://github.com/Quandong-Zhang/Violet.git
+sudo git clone https://github.com/yesmore/upbot.git
 cd Violet
 sudo bash setup.sh
 ./biliup login
