@@ -187,7 +187,7 @@ def main(vUrl, TID, plain_title=True):
         if biliupOutput.find("标题相同") == -1:
             print(biliupOutput)
             print(
-                "👻 投稿失败.\n👻 解决问题参考 https://github.com/yesmore/upbot/issues or https://github.com/ForgQi/biliup-rs/issues "
+                "👻 投稿失败.\n👻 解决问题参考 https://github.com/yesmore/U-To-B/issues or https://github.com/ForgQi/biliup-rs/issues "
             )
             exit(1)
         else:
@@ -195,15 +195,15 @@ def main(vUrl, TID, plain_title=True):
             if REMOVE_FILE:
                 shutil.rmtree("./videos/" + str(id_))
     print("\n🎉🎉🎉 投稿成功，感谢使用哔哩哔哩投稿姬！")
-    print("⭐⭐⭐ 如果你觉得小姬姬还不错，那就点个赞吧：https://github.com/yesmore/upbot\n")
+    print("⭐⭐⭐ 如果你觉得小姬姬还不错，那就点个赞吧：https://github.com/yesmore/U-To-B\n")
 
     if REMOVE_FILE:
         shutil.rmtree("./videos/" + str(id_))
 
 
 if __name__ == "__main__":
-    # 在此命令行调用该脚本，参数1为视频链接，如：https://www.youtube.com/watch?v=dQw4w9WgXcQ 
-    # 参数2为TID，如：21，参考：https://biliup.github.io/tid-ref.html
+    # 在此命令行调用该脚本，参数1为视频链接，如：https://www.youtube.com/watch?v=xxxxxxxx 
+    # 参数2为视频分区 TID，如：21，参考：https://biliup.github.io/tid-ref.html
     # 知识区： 201,科学科普 124,社科·法律·心理 228,人文历史 207,财经商业 208,校园学习 209,职业职场 229,设计·创意 122,野生技能协会
     main(sys.argv[1], sys.argv[2])
     exit(0)
