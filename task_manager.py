@@ -4,8 +4,8 @@ import time
 import new_downloader
 import requests
 
-OWNER=486914885 #要发送命令的用户uid(现在B站叫mid)
-REFERSH_TIME=2.5 #检查命令消息间隔时间，单位：分钟
+OWNER=486914885 # 要发送命令的用户uid(现在B站叫mid)
+REFERSH_TIME=2.5 # 检查命令消息间隔时间，单位：分钟
 
 
 def get_cookie():
@@ -24,7 +24,7 @@ def no_space(string):
     return string.replace(" ", "")
 
 def get_bilibili_api(url):
-    r = requests.get(url,cookies={"SESSDATA": get_cookie()})#,verify=False)
+    r = requests.get(url,cookies={"SESSDATA": get_cookie()}) #,verify=False)
     return json.loads(r.text)
 
 def save(data,path="./data.json"):
@@ -40,7 +40,7 @@ def match_url(url):
     return no_space(urlStringList[1])
 
 def get_task_list():
-    #global TID #顺便刷下TID
+    # global TID #顺便刷下TID
     return_list=[]
     task_list=get_bilibili_api("https://api.vc.bilibili.com/svr_sync/v1/svr_sync/fetch_session_msgs?talker_id="+str(OWNER)+"&session_type=1")["data"]["messages"]
     i=0
@@ -61,8 +61,8 @@ def main():
     try:
         task_history=read()
     except:
-        task_history=[]#initial list task_history
-    this_download=False#开始视为没请求过接口
+        task_history=[] # initial list task_history
+    this_download=False # 开始视为没请求过接口
     while True:
         task_list=get_task_list()
         n=0
@@ -92,7 +92,7 @@ if __name__=="__main__":
 #    try:
 #        TID=int(read("./TID.json"))
 #    except FileNotFoundError:
-#        TID=21 #tid保护性赋值（别问我为什么是生活-日常，因为容易过审）
+#        TID=21 # tid保护性赋值（别问我为什么是生活-日常，因为容易过审）
     while True:
         try:
             main()
