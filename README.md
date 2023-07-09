@@ -16,7 +16,7 @@ sudo bash setup.sh
 ./biliup login
 
 # 3.启动项目
-#  在运行下面这行命令之前请先参照下文中 `参数修改` 中的**1、2**步对 `task_manager.py` 和 `new_downloader.py` 做出修改
+#  在运行下面这行命令之前请先参照下文中 `参数修改` 中的 1、2 步对 task_manager.py 和 new_downloader.py 做出修改
 sudo bash start.sh 
 ```
 
@@ -30,7 +30,7 @@ sudo bash start.sh
 sudo bash setup.sh && sudo bash start.sh 
 ```
 
-# 搬运命令
+# 调用命令
 
 ```shell
 python3 new_downloader.py <url> <tid>
